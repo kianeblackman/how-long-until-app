@@ -8,13 +8,10 @@ function getValue() {
 }
 
 function startTimer(yearUser, monthUser, dayUser) {
-  console.log(typeof yearUser);
   //the set date that you want to count towards
   const countDate = new Date(
     `${dayUser}, ${monthUser}, ${yearUser} 00:00:00`
   ).getTime();
-
-  console.log(countDate);
 
   //the current date
   const now = new Date().getTime();
