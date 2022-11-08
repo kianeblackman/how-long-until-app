@@ -1,15 +1,20 @@
-document.getElementById("date").addEventListener("change", function () {
-  console.log(this.value);
-});
+// document.getElementById("date").addEventListener("change", function () {
+//   console.log(this.value);
+// });
 
-let countDown = () => {
-  let userMonth = 1;
-  let userDay = 7;
-  let userYear = 2024;
+function getValue() {
+  let inputValue = document.querySelector('#user-date').value;
+  return inputValue.split('-').map(parseInt);
+}
+
+function startTimer(yearUser, monthUser, dayUser) {
+  console.log(typeof yearUser);
   //the set date that you want to count towards
   const countDate = new Date(
-    `${userMonth}, ${userDay}, ${userYear} 00:00:00`
+    `${dayUser}, ${monthUser}, ${yearUser} 00:00:00`
   ).getTime();
+
+  console.log(countDate);
 
   //the current date
   const now = new Date().getTime();
@@ -30,11 +35,18 @@ let countDown = () => {
   const textSecond = Math.floor((gap % minute) / second);
 
   //selects the html elements and replaces the innerText with the times
-  document.querySelector(".day").innerText = textDay;
-  document.querySelector(".hour").innerText = textHour;
-  document.querySelector(".minute").innerText = textMinute;
-  document.querySelector(".second").innerText = textSecond;
-};
+  document.querySelector('.day').innerText = textDay;
+  document.querySelector('.hour').innerText = textHour;
+  document.querySelector('.minute').innerText = textMinute;
+  document.querySelector('.second').innerText = textSecond;
+}
 
-//sets the function to run every second on load
-countDown(setInterval(countDown, 1000));
+document
+  .getElementById('submit')
+  .addEventListener('click', function countDown() {
+    let [yearUser, monthUser, dayUser] = getValue();
+    setInterval(runTimer, 1000);
+    function runTimer() {
+      startTimer(yearUser, monthUser, dayUser);
+    }
+  });
